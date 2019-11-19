@@ -1,8 +1,51 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #00B7FF; }
 
 a {
-  color: #00B7FF; }
+  color: #00B7FF;
+  font-size: 30px;
+  text-decoration: none; }
+
+.welcome {
+  margin-left: 40%;
+  color: black;
+  font-size: 40px; }
+
+.containerbuttons {
+  margin-left: 30%; }
+
+button {
+  width: 20%;
+  height: 70px;
+  margin: 10px;
+  border-radius: 15px;
+  background-color: black; }
+
+.formsign {
+  margin-left: 40%;
+  font-size: 30px; }
+
+input {
+  width: 30%;
+  height: 30px;
+  margin: 10px; }
+
+.botsign {
+  width: 20%;
+  height: 70px;
+  margin: 10px;
+  border-radius: 15px;
+  background-color: black;
+  color: #00B7FF;
+  font-size: 30px; }
+
+.reIndex {
+  color: black;
+  text-decoration: underline; }
+
+.private {
+  margin-left: 30%; }
 
 /*# sourceMappingURL=style.css.map */
