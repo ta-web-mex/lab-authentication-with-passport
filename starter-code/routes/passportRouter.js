@@ -1,20 +1,19 @@
-const express        = require("express");
-const passportRouter = express.Router();
+// const express        = require("express");
+// const passportRouter = express.Router();
+const router = require("express").Router();
 
-// Require User model
+// passportRouter.get("/private-page", ensureLogin, (req, res) => {
+//   res.render("passport/private", { user: req.user });
+// });
 
-// Signup Route
+// function ensureLogin(req, res, next) {
+//   return req.isAuthenticated() ? next() : res.redirect("/login")
+// }
 
-// Login Route
 
-// Logout Route
+router.get("/", (req, res) => res.send("Es el nombrede user"));
+router.get("/amigos", (req, res) => res.send("amigos user"));
 
-passportRouter.get("/private-page", ensureLogin, (req, res) => {
-  res.render("passport/private", { user: req.user });
-});
 
-function ensureLogin(req, res, next) {
-  return req.isAuthenticated() ? next() : res.redirect("/login")
-}
 
-module.exports = passportRouter;
+module.exports = router;
