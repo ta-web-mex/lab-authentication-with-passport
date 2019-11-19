@@ -1,0 +1,20 @@
+<h2>Log in</h2>
+
+<form action="/login" method="POST" id="form-container">
+
+  <label for="email">Email</label>
+  <input id="email" type="email" name="email" placeholder="user@domain.com" />
+  <br /><br />
+  <label for="password">Password</label>
+  <input id="password" type="password" name="password" placeholder="password" />
+  <br><br>
+
+  {{#if message}}
+  <div class="error-message" style="color: red;">{{ message }}</div>
+  {{/if}}
+  <br><br>
+
+  <input type="submit" value="Log In">
+
+
+  </p>
