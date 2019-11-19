@@ -1,20 +1,36 @@
-const express        = require("express");
+const express = require("express");
 const passportRouter = express.Router();
+//
 
-// Require User model
+const router = express.Router();
+const {
+  signupGet,
+  signupPost,
 
-// Signup Route
+} = require("../controllers/auth.controller");
 
-// Login Route
+//const passport = require("../config/passport");
 
-// Logout Route
 
-passportRouter.get("/private-page", ensureLogin, (req, res) => {
-  res.render("passport/private", { user: req.user });
-});
+// tema: Require User model
 
-function ensureLogin(req, res, next) {
-  return req.isAuthenticated() ? next() : res.redirect("/login")
-}
+// tema:Signup Route
+
+// tema:Login Route
+router.get("/signup", signupGet);
+router.post("/signup", signupPost);
+
+
+// tema:Logout Route
+
+// passportRouter.get("/private-page", ensureLogin, (req, res) => {
+//   res.render("passport/private", {
+//     user: req.user
+//   });
+// });
+
+// function ensureLogin(req, res, next) {
+//   return req.isAuthenticated() ? next() : res.redirect("/login")
+// }
 
 module.exports = passportRouter;
