@@ -1,20 +1,40 @@
-const express        = require("express");
+const express = require('express');
 const passportRouter = express.Router();
+const { signupGet, signupPost, loginGet } = require('../controllers/index.controllers');
 
-// Require User model
+const passport = require('../config/passport');
 
-// Signup Route
+passportRouter.get('/signup', signupGet);
 
-// Login Route
+passportRouter.post('/signup', signupPost);
 
-// Logout Route
+passportRouter.get('/login', isNotLoggedIn, loginGet);
 
-passportRouter.get("/private-page", ensureLogin, (req, res) => {
-  res.render("passport/private", { user: req.user });
+function isNotLoggedIn(req, res, next) {
+	!req.isAuthenticated() ? next() : res.redirect('/passport/private-page');
+}
+
+passportRouter.post(
+	'/login',
+	passport.authenticate('local', {
+		successRedirect: '/passport/private-page',
+		failureRedirect: '/passport/login'
+	})
+);
+
+passportRouter.get('/private-page', ensureLogin, (req, res) => {
+	console.log(req.user);
+	res.render('passport/private', { user: req.user });
 });
 
 function ensureLogin(req, res, next) {
-  return req.isAuthenticated() ? next() : res.redirect("/login")
+	console.log(req.isAuthenticated());
+	return req.isAuthenticated() ? next() : res.redirect('/passport/login');
 }
+
+passportRouter.get('/logout', (req, res, next) => {
+	req.logout();
+	res.redirect('/passport/login');
+});
 
 module.exports = passportRouter;
