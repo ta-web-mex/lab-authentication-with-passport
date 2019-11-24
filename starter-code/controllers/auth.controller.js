@@ -35,3 +35,15 @@ exports.signupPost = (req, res, next) => {
       }
     });
 }
+
+exports.loginGet = (_, res) => {
+  //res.render("./../views/passport/login.hbs ");
+  res.render("./../views/passport/login.hbs ");
+};
+
+
+// exports.profileGet = (req, res) => {
+//   res.render("auth/profile", {
+//     user: req.user
+//   });
+// };

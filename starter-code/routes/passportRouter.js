@@ -1,36 +1,53 @@
 const express = require("express");
 const passportRouter = express.Router();
-//
-
-const router = express.Router();
-const {
-  signupGet,
-  signupPost,
-
-} = require("../controllers/auth.controller");
-
-//const passport = require("../config/passport");
+const passport = require("passport")
 
 
-// tema: Require User model
+// Require User model
+const User = require("../models/User")
 
-// tema:Signup Route
+passport.initialize()
+passport.session()
+passport.use(User.createStrategy())
 
-// tema:Login Route
-router.get("/signup", signupGet);
-router.post("/signup", signupPost);
+passport.serializeUser(User.serializeUser())
+
+passport.deserializeUser(User.deserializeUser())
+// Signup Route
+
+passportRouter.get("/signup", (req, res) => res.render("../views/passport/signup.hbs"))
+
+passportRouter.post("/signup", (req, res) => {
+  const {
+    email,
+    password
+  } = req.body
+  User.register({
+      email
+    }, password)
+    .then(user => res.redirect("/"))
+    .catch(() => res.redirect("/signup"))
+})
+// Login Route
+
+passportRouter.get("/login", (req, res) => res.render("../views/passport/login.hbs"))
+
+passportRouter.post("/login", passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/login"
+}))
+
+// Logout Route
+
+passportRouter.get("/private-page", safeLogin, (req, res) => {
+  res.render("passport/private", {
+    user: req.user
+  });
+});
 
 
-// tema:Logout Route
-
-// passportRouter.get("/private-page", ensureLogin, (req, res) => {
-//   res.render("passport/private", {
-//     user: req.user
-//   });
-// });
-
-// function ensureLogin(req, res, next) {
-//   return req.isAuthenticated() ? next() : res.redirect("/login")
-// }
+function safeLogin(req, res, next) {
+  return req.isAuthenticated() ? next() : res.redirect("/login")
+}
 
 module.exports = passportRouter;

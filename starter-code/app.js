@@ -8,11 +8,12 @@ const hbs = require('hbs');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
-
+const session = require("express-session");
+const flash = require("connect-flash");
+const passport = require("passport")
 
 mongoose
-  // cambien la BBDD de nombre starter-code a starter-code1
-  .connect('mongodb://localhost/starter-code1', {
+  .connect('mongodb://localhost/starter-code', {
     useNewUrlParser: true
   })
   .then(x => {
@@ -28,6 +29,8 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 const app = express();
 
 // Middleware Setup
+app.use(flash());
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -35,6 +38,19 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 
+app.use(
+  session({
+    secret: process.env.SECRET,
+    cookie: {
+      maxAge: 1000 * 60 * 60
+    },
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
@@ -52,7 +68,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'LAB- Passport local Auth';
 
 
 // Routes middleware goes here
