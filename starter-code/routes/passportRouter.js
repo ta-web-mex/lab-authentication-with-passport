@@ -1,20 +1,5 @@
-const express        = require("express");
-const passportRouter = express.Router();
+const router = require("express").Router();
 
-// Require User model
+router.get("/", (req, res) => res.send("User Home"));
 
-// Signup Route
-
-// Login Route
-
-// Logout Route
-
-passportRouter.get("/private-page", ensureLogin, (req, res) => {
-  res.render("passport/private", { user: req.user });
-});
-
-function ensureLogin(req, res, next) {
-  return req.isAuthenticated() ? next() : res.redirect("/login")
-}
-
-module.exports = passportRouter;
+module.exports = router;
