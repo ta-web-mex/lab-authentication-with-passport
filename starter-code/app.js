@@ -71,7 +71,10 @@ const index = require('./routes/index');
 app.use('/', index);
 const passportRouter = require("./routes/passportRouter");
 app.use('/', passportRouter);
-app.use("/", isAuthenticated, require("./routes/passportRouter"))
+app.use("/private-page", //isAuthenticated, 
+(req,res)=>{
+  res.render("passport/private",{ user: req.user })
+})
 
 
 module.exports = app;

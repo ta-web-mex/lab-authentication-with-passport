@@ -13,7 +13,7 @@ passportRouter.post("/signup", signup)
 passportRouter.get("/login", loginView)
 passportRouter.post( "/login",
   passport.authenticate("local", {
-    successRedirect: "/prvate-page",
+    successRedirect: "/private-page",
     failureRedirect: "/login",
     failureFlash: true
   })
@@ -21,12 +21,14 @@ passportRouter.post( "/login",
 // Logout Route
 passportRouter.get("/loging", logout)
 
-passportRouter.get("/private-page", ensureLogin, (req, res) => {
+//est se pasa a app.js
+/*passportRouter.get("/private-page", ensureLogin, (req, res) => {
   res.render("passport/private", { user: req.user });
 });
+//esto se pasa a middlewares
 //passportRouter.post("/private", private)
 function ensureLogin(req, res, next) {
   return req.isAuthenticated() ? next() : res.redirect("/login")
-}
+}*/
 
 module.exports = passportRouter;
