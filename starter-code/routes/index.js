@@ -1,14 +1,15 @@
 const express = require('express');
 const passport = require("passport");
 const router=express();
-
+//const { isAuthenticated, checkRole } = require("./middlewares");
 
 const {
   signUpView,
   signUpPost,
   logInView,
   logInPost,
-  privateView
+  privateView,
+  logout
 }=require("../controllers/authControllers.js")
 
 /* GET home page */
@@ -30,6 +31,12 @@ router.post("/login", passport.authenticate("local", {
   failureFlash: true,
 }));
 
-router.get("/private", privateView,);
+router.get("/private", ensureLogin, privateView,);
+
+function ensureLogin(req, res, next) {
+  return req.isAuthenticated() ? next() : res.redirect("/login")
+}
+
+router.get("/logout", logout)
 
 module.exports = router;

@@ -22,8 +22,16 @@ res.redirect("/login");
  }
 
  exports.privateView=(req, res,next) => {
+
   res.render("passport/private", { user: req.user });
 }
+
+
+exports.logout = (req, res) => {
+  req.logout();
+  res.redirect("/");
+};
+
 /*
  exports.logInPost=()=>{
   passport.authenticate("local",{

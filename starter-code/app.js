@@ -11,7 +11,7 @@ const path         = require('path');
 const session = require("express-session");
 const passport = require("./config/passport");
 const flash = require("connect-flash");
-//const { isAuthenticated, checkRole } = require("./middlewares");
+
 
 
 mongoose
