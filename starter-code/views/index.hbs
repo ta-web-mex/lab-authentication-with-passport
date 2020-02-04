@@ -1,2 +1,9 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
+<a type="button" href="/logIn" class="btn btn-primary">Go to Log In</a>
+<a type="button" href="/signUp" class="btn btn-secondary">Go to Sign In</a>
+<a type="button" href="/private" class="btn btn-info">Go to private</a>
+
+{{#if user}}
+    <a type="button" href="/logOut" class="btn btn-danger">LogOut</a>
+{{/if}}

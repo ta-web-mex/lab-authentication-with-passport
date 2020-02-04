@@ -1,20 +1,25 @@
 const express        = require("express");
 const passportRouter = express.Router();
+const passport = require('../config/passport')
 
-// Require User model
+const {
+  loginView,
+  signupView,
+  signUpPost,
+  logOut
+} = require('../controllers/login.controllers')
 
-// Signup Route
+passportRouter.get('/logIn', loginView)
+passportRouter.post('/logIn', 
+    passport.authenticate('local', {
+      successRedirect: '/private',
+      failureRedirect: '/logIn',
+      failureFlash: true
+    })
+  )
+passportRouter.get('/signUp', signupView)
+passportRouter.post('/signUp', signUpPost)
+passportRouter.get('/logOut', logOut)
 
-// Login Route
-
-// Logout Route
-
-passportRouter.get("/private-page", ensureLogin, (req, res) => {
-  res.render("passport/private", { user: req.user });
-});
-
-function ensureLogin(req, res, next) {
-  return req.isAuthenticated() ? next() : res.redirect("/login")
-}
 
 module.exports = passportRouter;
