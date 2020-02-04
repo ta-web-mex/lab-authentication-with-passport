@@ -1,0 +1,13 @@
+<h2>Sign Up</h2>
+<form action="/signup" method="POST">
+  <label>e-mail</label><br>
+  <input type="text" name="email" placeholder="email">
+  <label>password</label><br>
+  <input type="password" name="password" placeholder="password">
+  <input type="submit">
+</form><br>
+<a href="/login">or Log in?</a>
+
+{{#if message}}
+  <p style="color: red;">{{message}}</p>
+{{/if}}

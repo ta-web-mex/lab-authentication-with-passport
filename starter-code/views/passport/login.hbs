@@ -1,0 +1,12 @@
+<h2>Login</h2>
+<form action="/login" method="POST">
+  <label>e-mail</label>
+  <input type="text" name="email" placeholder="email"/>
+  <label>password</label>
+  <input type="password" name="password" placeholder="password"/>
+  <input type="submit">
+</form><br>
+<a href="signup.hbs">Or Sign Up?</a>
+{{#if message}}
+<p style="color:red;">{{message}}</p>
+{{/if}}

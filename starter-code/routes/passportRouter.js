@@ -1,13 +1,35 @@
 const express        = require("express");
 const passportRouter = express.Router();
-
-// Require User model
+const bcrypt         = require("bcrypt")
+const passport       = require("../config/passport")
+const { 
+  signupView, 
+  signup, 
+  loginView, 
+  logout }           = require('../controllers/passportController.js')
+  const User         = require('../models/User')
 
 // Signup Route
 
+passportRouter.get('/signup', signupView)
+passportRouter.post('/signup', signup)
+
 // Login Route
 
+passportRouter.get("/login", loginView)
+passportRouter.post("/login", 
+passport.authenticate("local", {
+  successRedirect: "/private-page",
+  failureRedirect: "/login",
+  failureFlash: true
+    }
+  )
+)
+
 // Logout Route
+
+passportRouter.get("/logout", logout);
+
 
 passportRouter.get("/private-page", ensureLogin, (req, res) => {
   res.render("passport/private", { user: req.user });
