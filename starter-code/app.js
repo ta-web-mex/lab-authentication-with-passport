@@ -8,6 +8,9 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+const session      = require("express-session");
+const passport     = require("./config/passportConfigs");
+const flash        = require('connect-flash')
 
 
 mongoose
@@ -29,6 +32,15 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(flash());
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Express View engine setup
 
@@ -36,8 +48,7 @@ app.use(require('node-sass-middleware')({
   src:  path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
   sourceMap: true
-}));
-      
+}));  
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
