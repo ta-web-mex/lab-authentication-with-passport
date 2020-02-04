@@ -42,10 +42,8 @@ app.use(
     saveUninitialized: true
   })
 )
-app.use((req, res, next) => {
-  console.log(req.user);
-  next();
-})
+
+
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({

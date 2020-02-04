@@ -28,6 +28,6 @@ exports.logout = (req, res) => {
   res.redirect("/login");
 };
 
-exports.private = (req, res) => {
-  res.render("passport/private"), {user: req.user}
-}
+//exports.private = (req, res) => {
+//  res.render("passport/private"), {user: req.user}
+//}
