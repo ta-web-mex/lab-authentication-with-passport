@@ -1,0 +1,17 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">SignUp</h5>
+    <form action="/signUp" method="POST">
+        <label>Email: </label><br>
+        <input type="email" name="email"><br>
+        <label>Password: </label><br>
+        <input type="password" name="password"><br><br>
+        <button class="btn btn-info"type="submit">Sign Up!!</button>
+    </form>
+    {{#if message}}
+    <div class="alert alert-danger" role="alert">
+        {{message}}
+    </div>
+    {{/if}}
+  </div>
+</div>
