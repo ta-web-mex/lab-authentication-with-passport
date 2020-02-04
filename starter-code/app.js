@@ -9,9 +9,14 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
+const session = require('express-session')
+const passport = require('./config/passport')
+const flash = require('connect-flash')
+const {isAuthenticated} = require('./middlewares')
+
 
 mongoose
-  .connect('mongodb://localhost/starter-code', {useNewUrlParser: true})
+  .connect('mongodb://localhost/starter-code', {useNewUrlParser: true, useUnifiedTopology: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -29,6 +34,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(flash())
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true
+  })
+)
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Express View engine setup
 
@@ -56,5 +72,8 @@ app.use('/', index);
 const passportRouter = require("./routes/passportRouter");
 app.use('/', passportRouter);
 
+app.use("/private-page", isAuthenticated, (req, res) => {
+  res.render("passport/private", { email: req.email });
+})
 
 module.exports = app;
