@@ -12,12 +12,9 @@ const path         = require('path');
 //Creamos unas contasntes la cuales vamos a amndar a requerir los paquetes que isntalmos passport conect-flash y exprres-session-mongose
 
 
-
-const passport  = require('./config/passport');
+const session = require("express-session");
+const passport = require("./config/passport");
 const flash = require('connect-flash');
-const session = require ('express-session')
-
-
 
 mongoose
   .connect('mongodb://localhost/starter-code', {useNewUrlParser: true})
@@ -46,8 +43,15 @@ app.use(session({
   saveUninitialized: true
 }))
 
-
+app.use(passport.initialize());
+app.use(passport.session());
 // Express View engine setup
+app.use((req, res, next) => {
+  console.log(req.user);
+  next();
+});
+
+
 
 app.use(require('node-sass-middleware')({
   src:  path.join(__dirname, 'public'),
