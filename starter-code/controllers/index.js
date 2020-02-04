@@ -2,7 +2,7 @@ const User = require('../models/User');
 
 
 exports.signupView = (req, res) => {
-    res.render('views/signup')
+    res.render('passport/signup')
 }
 
 exports.signup = async (req, res) => {

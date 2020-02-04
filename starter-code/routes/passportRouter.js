@@ -3,12 +3,14 @@ const passportRouter = express.Router();
 
 
 // Require User model
-const User = require('models/User')
+const User = require('../models/User')
+const {signupView,
+signup} = require('../controllers/index')
 
 
 // Signup Route
-passportRouter.get('signup', signupView)
-
+passportRouter.get('/signup', signupView)
+passportRouter.post("/signup", signup);
 
 // Login Route
 
