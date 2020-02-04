@@ -11,6 +11,8 @@ const logger       = require('morgan');
 const path         = require('path');
 const flash = require("connect-flash");
 const passport = require('passport')
+const { isAuthenticated} = require("./middleware");
+
 
 
 
@@ -71,6 +73,7 @@ app.use('/', index);
 const passportRouter = require("./routes/passportRouter");
 app.use('/', passportRouter);
 //hace middleware para checar session
+app.use("/", isAuthenticated, require("./routes/privateRoutes"));
 
 
 module.exports = app;

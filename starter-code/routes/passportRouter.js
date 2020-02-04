@@ -1,6 +1,6 @@
 const express        = require("express");
 const passportRouter = express.Router();
-const {signup, signupView, loginView, login} = require('../contollers/authController')
+const {signup, signupView, loginView, logout} = require('../contollers/authController')
 // Require User model
 const User = require('../models/User')
 const passport = require('../config/passport')
@@ -19,6 +19,8 @@ passportRouter.post('/login', passport.authenticate('local', {
   failureFlash: true
 }))
 
+//logout
+passportRouter.get('/logout', logout)
 
 // Logout Route
 passportRouter.get("/private-page", ensureLogin, (req, res) => {

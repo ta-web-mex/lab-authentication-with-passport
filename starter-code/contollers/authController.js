@@ -20,6 +20,11 @@ exports.loginView = (req, res) => {
     res.render('passport/login', {msg: req.flash('error')})
 }
 
+exports.logout = (req, res) => {
+    req.logout()
+    res.redirect('login')
+}
+
 
 
 
