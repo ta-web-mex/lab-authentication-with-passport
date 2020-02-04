@@ -1,8 +1,10 @@
 const express        = require("express");
+const passport = require("../config/passport")
 const passportRouter = express.Router();
 const {
   signupView,
-  signup
+  signup,
+  loginView
 } = require("../controllers/index")
 
 // Require User model
@@ -13,6 +15,16 @@ passportRouter.get("/signup", signupView)
 passportRouter.post("/signup", signup)
 
 // Login Route
+passportRouter.get("/login", loginView)
+
+passportRouter.post(
+  "/login",
+  passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/login",
+  failureFlash: true,
+  })
+)
 
 // Logout Route
 
