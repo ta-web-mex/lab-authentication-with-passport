@@ -10,12 +10,12 @@ const logger       = require('morgan');
 const path         = require('path');
 
 const session      = require('express-session')
-const passport     = require('passport')
+const passport     = require('./config/passport')
 const flash        = require('connect-flash')
 
 
 mongoose
-  .connect('mongodb://localhost/starter-code', {useNewUrlParser: true})
+  .connect('mongodb://localhost/auth-app', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -41,6 +41,8 @@ resave: false,
 saveUninitialized: true
     })
 )
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Express View engine setup
 

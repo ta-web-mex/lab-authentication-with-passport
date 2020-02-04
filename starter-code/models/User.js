@@ -11,8 +11,9 @@ const userSchema = new Schema(
   }
 );
 
+userSchema.plugin(PLM, {usernameField: 'email'})
 const User = mongoose.model("User", userSchema);
-userSchema.plugin(PLM, {userNameField: 'email'})
+
 //module.exports = User;
 
 module.exports = User;
