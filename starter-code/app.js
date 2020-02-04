@@ -9,6 +9,15 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
+//Creamos unas contasntes la cuales vamos a amndar a requerir los paquetes que isntalmos passport conect-flash y exprres-session-mongose
+
+
+
+const passport  = require('./config/passport');
+const flash = require('connect-flash');
+const session = require ('express-session')
+
+
 
 mongoose
   .connect('mongodb://localhost/starter-code', {useNewUrlParser: true})
@@ -29,6 +38,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//Creamos el app use de seesion recordemos que este contriene el secreto y cl aula va guardo en el .env
+app.use(session({
+  secret: process.env.SECRET, //Recordemosd que son los secretos del env y los habia llamado de otro nombre y tenia fallos
+  resave: false,
+  saveUninitialized: true
+}))
+
 
 // Express View engine setup
 

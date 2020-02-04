@@ -1,0 +1,25 @@
+<h1>Sing-up</h1>
+{{!-- Creamos un formulario el cual
+Contendra los datos enviados del singup para reguistrar a
+la persona.
+Le asignamos un name a los input los cuales tomaran dicho parametro como valor final agregado
+
+ --}}
+<form action="/singup" method="post">
+    <label for="">Correo</label>
+    <input type="email" name="email" id="" placeholder="Email">
+    <br>
+    <label for="">Password</label>
+    <input type="password" name="password" id="" placeholder="Password">
+    <br>
+    <input type="submit" value="Crear Cuenta">
+
+</form>
+
+{{!-- Se agrega en caso de error que imprima el mensaje 
+dicho mensaje ya se encuentra agregado por passport
+el cual sera pintado en un color rojo para denotar que hay un error
+El cual sera de si alguno de los campos que se pidan no ah sido ingresado --}}
+{{#if message}}
+<div class="error-message" style="color:rgb(255, 0, 51)">{{message}}</div>
+{{/if}}
