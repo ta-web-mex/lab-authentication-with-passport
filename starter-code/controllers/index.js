@@ -11,7 +11,12 @@ exports.signup = async(req, res) =>{
       message: "Completa los campos"
     })
   }
-  
+  const userOnDB =await User.findOne({email});
+  if (userOnDB !== null){
+    res.render('auth/signup', {message: 'El correo ya fue registrado'})
+  }
+  await User.register({name, email}, password)
+  res.redirect('/login')
 }
 
 

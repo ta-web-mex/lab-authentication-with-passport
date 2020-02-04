@@ -3,7 +3,9 @@ const passportRouter = express.Router();
 const passport = require('../config/passport')
 const {
   signupView,
-  signup
+  signup, 
+  loginView,
+  logout
 } = require('../controllers/index')
 
 
@@ -15,6 +17,16 @@ passportRouter.get('/signup', signupView)
 passportRouter.post('/signup', signup)
 
 // Login Route
+
+passportRouter.get('/login', loginView)
+passportRouter.post('/login', passport.authenticate('local',{
+  successRedirect:'/',
+  failureRedirect:'/login',
+  failureFlash: true
+})
+)
+
+
 
 // Logout Route
 
