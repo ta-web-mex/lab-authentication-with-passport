@@ -9,20 +9,24 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
-//Creamos unas contasntes la cuales vamos a amndar a requerir los paquetes que isntalmos passport conect-flash y exprres-session-mongose
-
-
+//Ultimas cosas agregadas para el inicio session y el passport
 const session = require("express-session");
 const passport = require("./config/passport");
-const flash = require('connect-flash');
+const flash = require("connect-flash");
+const { isAuthenticated, checkRole } = require("./middlewares");
+
+
+
 
 mongoose
-  .connect('mongodb://localhost/starter-code', {useNewUrlParser: true})
+  .connect(process.env.DB, { useNewUrlParser: true ,useUnifiedTopology: true })
   .then(x => {
-    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+    console.log(
+      `Connected to Mongo! Database name: "${x.connections[0].name}"`
+    );
   })
   .catch(err => {
-    console.error('Error connecting to mongo', err)
+    console.error("Error connecting to mongo", err);
   });
 
 const app_name = require('./package.json').name;
@@ -35,22 +39,18 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(flash());
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true
+  })
+);
 
-//Creamos el app use de seesion recordemos que este contriene el secreto y cl aula va guardo en el .env
-app.use(session({
-  secret: process.env.SECRET, //Recordemosd que son los secretos del env y los habia llamado de otro nombre y tenia fallos
-  resave: false,
-  saveUninitialized: true
-}))
-
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize())
+app.use(passport.session())
 // Express View engine setup
-app.use((req, res, next) => {
-  console.log(req.user);
-  next();
-});
-
 
 
 app.use(require('node-sass-middleware')({
@@ -58,7 +58,9 @@ app.use(require('node-sass-middleware')({
   dest: path.join(__dirname, 'public'),
   sourceMap: true
 }));
-      
+ 
+
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -68,14 +70,15 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Coffe & Books';
 
 
-// Routes middleware goes here
-const index = require('./routes/index');
-app.use('/', index);
-const passportRouter = require("./routes/passportRouter");
-app.use('/', passportRouter);
+const index = require("./routes/index");
+app.use("/", index);
+
+
+app.use('/', require('./routes/routesGoogle'))
+app.use('/', require('./routes/protectedRoutes'))
 
 
 module.exports = app;

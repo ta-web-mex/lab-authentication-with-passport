@@ -1,2 +1,22 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
+
+{{!-- Problemas con las rutas nuevamente, me ayudo victor
+Puesto que si tenia la idea pero estaba eerado hacia donde apuntaba mi direccion
+
+ --}}
+ 
+<a href="/auth/google">Login with Google</a>
+</form>
+<a href="/logout">LOGOUT</a>
+
+<section>
+  {{#each places as |place|}}
+
+    <div>
+      <h5>{{name}}</h5>
+      <p>{{placeType}}</p>
+    </div>
+
+  {{/each}}
+</section>

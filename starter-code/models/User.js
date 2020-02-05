@@ -1,22 +1,26 @@
-const mongoose = require("mongoose");
-const Schema   = mongoose.Schema;
-
-//Creamos la constante PLM la cual sera asignada al plugin de passport local mongoose
-
-const PLM = require('passport-local-mongoose')
-
+const { model, Schema } = require('mongoose')
+const  PLM = require('passport-local-mongoose')
 
 const userSchema = new Schema(
+    {
+    email : String,
+    name : String,
+    googleID: String,
+    places : [{
+        type: Schema.Types.ObjectId,
+        ref: 'Place'
+    }],
+   
+    
+  },  
+
+  
   {
-    email: String
-  }, 
-  {
-    timestamps: true
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
   }
-);
 
-//PAsos para usar el esquema y agregar el plugin, hay que tener cuidado de ponerlo bien para que no tire mensaje de error
-userSchema.plugin(PLM, {usernameField : "email"})
-const User = mongoose.model("User", userSchema);
 
-module.exports = User;
+)
+
+userSchema.plugin(PLM,{usernameField:"email"})
+module.exports = model("User", userSchema)

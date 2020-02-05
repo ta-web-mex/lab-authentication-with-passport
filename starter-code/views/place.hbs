@@ -1,0 +1,28 @@
+<h3>{{name}}</h3>
+<p>{{placeType}}</p>
+<p>{{location.address}}</p>
+
+<div id='mapDetail' style='width: 400px; height: 300px;'></div>
+
+{{!-- Token privado que da la pagina de mapbox el cual por se publico no necesita enviarse a las rutas de env --}}
+<script>
+
+//Lo que nos enseño digeo de como colocar el mapa en la pagina
+
+//mandamos a llamar al mapboxgl y al token de acceso
+  mapboxgl.accessToken = 'pk.eyJ1IjoibGF3aTE2MTAiLCJhIjoiY2s2ODJxaDlwMDBudjNmcWoyMnV0bDRjMCJ9.5cbrFkFQrZYWx6mHOuZB5w';
+  
+//Creamos un nuevo map el cual contendra un contendio un estilo dado por la pagina
+//tambien un zoom el cual ayuda a que se muestra cerca del objetivo y no desde lejos
+//El center ayuda a centrar el objetivo con las corndadas
+//Lo que esta despues del . son metodos  del mismo map
+  const map = new mapboxgl.Map({
+container: 'mapDetail',
+style: 'mapbox://styles/mapbox/streets-v11',
+zoom: 15,
+center: [ {{location.coordinates}} ]
+})
+new mapboxgl.Marker()
+            .setLngLat([ {{location.coordinates}} ])
+            .addTo(map)
+</script>
