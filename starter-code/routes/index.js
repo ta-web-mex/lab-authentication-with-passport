@@ -13,7 +13,7 @@ router.get('/signup', (req,res,next)=>{
   res.render('passport/signup')
 })
 
-router.get('/login', (req,res)=> {
+router.get('/login',(req,res)=> {
   res.render('passport/login', {message: 'El correo '})
 })
 router.post(
@@ -25,7 +25,6 @@ router.post(
   })
 )
 
-router.get('/profile', (req, res)=>res.render('profile') )
 router.post('/signup', (req,res,next)=> {
 
 

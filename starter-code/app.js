@@ -11,6 +11,7 @@ const path         = require('path');
 const session      = require('express-session')
 const passport     = require('./config/passport')
 const flash        =require('connect-flash')
+const {auth}           =require('./middleware/midAuthenticate')
 
 
 mongoose
@@ -76,6 +77,7 @@ const index = require('./routes/index');
 app.use('/', index);
 const passportRouter = require("./routes/passportRouter");
 app.use('/', passportRouter);
+app.use('/',auth ,require('./routes/profile'))
 
 
 module.exports = app;
