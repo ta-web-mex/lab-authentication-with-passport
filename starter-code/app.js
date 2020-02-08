@@ -8,10 +8,14 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+const session      = require('express-session')
+const passport     = require('./config/passport')
+const flash        =require('connect-flash')
+const {auth}           =require('./middleware/midAuthenticate')
 
 
 mongoose
-  .connect('mongodb://localhost/starter-code', {useNewUrlParser: true})
+  .connect('mongodb://localhost/authPassport', {useNewUrlParser: true, useUnifiedTopology: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -23,6 +27,24 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
+app.use(flash())
+app.use(session({
+secret:'perris',
+resave:false,
+saveUninitialized:true
+}))
+
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+app.use((req, res, next) => {
+  console.log(req.user);
+  next();
+});
 
 // Middleware Setup
 app.use(logger('dev'));
@@ -55,6 +77,7 @@ const index = require('./routes/index');
 app.use('/', index);
 const passportRouter = require("./routes/passportRouter");
 app.use('/', passportRouter);
+app.use('/',auth ,require('./routes/profile'))
 
 
 module.exports = app;
