@@ -1,5 +1,7 @@
 const express        = require("express");
+const passport = require("../config/passport")
 const passportRouter = express.Router();
+
 const {
   signupView,
   signup,
@@ -8,9 +10,6 @@ const {
   private,
   logout
 } = require("../controllers/index")
-
-// Require User model
-const User = require("../models/User")
 
 // Signup Route
 passportRouter.get("/signup", signupView)
