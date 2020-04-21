@@ -1,0 +1,17 @@
+
+{{#if error}}
+<h2 style="color: red;">{{error}}</h2>
+{{/if}}
+
+
+<form action="{{action}}" method="POST">
+  {{#if signup}}
+  <input type="text" name="name" placeholder="Name" />
+  {{/if}}
+  <input type="email" name="email" placeholder="@.com">
+  <input type="password" name="password">
+  {{#if signup}}
+  <input type="password" name="verify">
+  {{/if}}
+  <input type="submit" value="{{button}}">
+</form>
