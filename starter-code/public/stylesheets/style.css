@@ -1,8 +1,32 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: darkcyan; }
 
 a {
   color: #00B7FF; }
+
+.form {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; }
+
+.form form {
+  width: 30%;
+  height: 30%;
+  background-color: rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; }
+
+.form form input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3px; }
 
 /*# sourceMappingURL=style.css.map */
