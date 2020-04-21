@@ -13,8 +13,8 @@ exports.saveSignUp = async (req, res) => {
 exports.showLogin = (req, res) => res.render('passport/login')
 
 exports.createLogin = passport.authenticate('local', {
-  successRedirect: '/done',
+  successRedirect: '/private-page',
   failureRedirect: '/login',
 })
 
-exports.doneLogin = (req, res) => res.render('passport/done')
+exports.doneLogin = (req, res) => res.render('passport/private')

@@ -17,7 +17,7 @@ passportRouter.post('/signup', saveSignUp)
 passportRouter.get('/login', showLogin)
 passportRouter.post('/login', createLogin)
 
-passportRouter.get('/done', doneLogin)
+passportRouter.get('/private', doneLogin)
 // Logout Route
 
 passportRouter.get('/private-page', ensureLogin, (req, res) => {
