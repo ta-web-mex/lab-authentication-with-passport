@@ -1,0 +1,14 @@
+<section class="form">
+  <h1>Signup</h1>
+
+  {{#if error}}
+  <p>{{error}}</p>
+  {{/if}}
+
+  <form action="/signup" method="POST">
+    <input type="email" name="email" placeholder="email">
+    <input type="password" name="password" placeholder="password">
+    <input type="password" name="verify" placeholder="verify-password">
+    <input type="submit" value='Create Account'>
+  </form>
+</section>
