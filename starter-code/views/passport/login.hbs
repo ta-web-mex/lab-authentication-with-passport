@@ -1,9 +1,14 @@
 <h1>Login</h1>
 
 <h3>{{err}}</h3>
-<form action="/login" method="POST">
+<div class='form'>
+  <form action="/login" method="POST">
 
-  <input type="email" name="email" placeholder="name@domain.com">
-  <input type="password" name="password" placeholder="password">
-  <input type="submit" value="Log In">
-</form>
+    <div><span>Email </span><input type="email" name="email" placeholder="name@domain.com"></div>
+    <div><span>Password </span><input type="password" name="password" placeholder="password"></div>
+    <input class='button' type="submit" value="Log In">
+  </form>
+</div>
+
+<br><br><br>
+<a href="/">Go to Home Page</a>
