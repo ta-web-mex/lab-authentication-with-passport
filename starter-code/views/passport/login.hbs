@@ -1,0 +1,10 @@
+<form action="/login" method="POST">
+  <label name="">E-mail</label>
+  <input type="text" name="email" placeholder="Your E-mail">
+  <label name="">Password</label>
+  <input type="password" name="Password" placeholder="Password">
+  <input type="submit" value="Log in!">
+</form>
+{{#if err}}
+{{err}}
+{{/if }}
