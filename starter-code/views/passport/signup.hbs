@@ -1,0 +1,22 @@
+<div id="sign-up">
+  <div class="form-container">
+    <h1>{{title}}</h1>
+
+    <form action="{{action}}" method="POST">
+      <label>Name</label>
+      <input type="text" name="name" placeholder="John Smith" />
+      <label>Email</label>
+      <input type="email" name="email" placeholder="name@gmail.com">
+      <label>Password</label>
+      <input type="password" name="password">
+      <label>Confirm Password</label>
+      <input type="password" name="verify">
+      <input class="form-button" type="submit" value="{{button}}">
+    </form>
+
+  </div>
+  <div class="button-home">
+    <a href="/">Home</a>
+    <a href="/login">Log in</a>
+  </div>
+</div>
