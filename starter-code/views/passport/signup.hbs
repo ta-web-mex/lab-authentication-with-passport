@@ -1,0 +1,12 @@
+<form action="/signup" method="POST">
+  <label name="">E-mail</label>
+  <input type="text" name="email" placeholder="Your E-mail">
+  <label name="">Password</label>
+  <input type="password" name="password" placeholder="Your Password">
+  <label name="">verify</label>
+  <input type="password" name="verify">
+  <input type="submit" value="Sign up!">
+</form>
+{{#if err}}
+{{err}}
+{{/if }}
